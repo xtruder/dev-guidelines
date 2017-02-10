@@ -50,7 +50,7 @@ looks like a real language.
 
 These are basic essentials that you should use and should avoid in javascript:
 
-- Install new node.js (it's back compatible):
+#### Install new node.js (it's back compatible):
 
 While your distro probably provides some old stable node.js, you are a developer
 that does not live a few years back. While i know developers are generally lazy,
@@ -58,7 +58,7 @@ and so are sysadmins, please install and use a decent version of node.js.
 
 https://nodejs.org/en/download/package-manager/
 
-- Stop using callback pattern
+#### Stop using callback pattern
 
 Promises exist in javascript from ancient nodejs 0.12. That's even before node.js
 had real versions and looked like unstable beta. While i see still many libraries
@@ -73,7 +73,7 @@ new Promise((resolve, reject) => {
 });
 ```
 
-- Avoid lodash/bluebird when possible
+#### Avoid lodash/bluebird when possible
 
 While i have been a big fan of bluebird like libraries which provided framework for working
 with javascript structures, it turns out that es6 and es7 get much better internal support
@@ -91,7 +91,7 @@ for working with js structures:
 If you using these internal javascript methods, they are much faster, and provide nicer stack
 traces which allows easier debugging.
 
-- Avoid compiling javascript if not needed
+#### Avoid compiling javascript if not needed
 
 I know there are fancy bleeding es7 or es8 features that you want to abuse, or you really want
 to use that typescript, that you have no idea how to use right, as you will soon be just writing
@@ -104,7 +104,7 @@ if he would actually be able to read code.
 If you need to compile, use at least decent compiler, like typescript. Babel produces search and
 replace garbage.
 
-- Use async/await
+#### Use async/await
 
 Async/await is a new promise syntastic sugar that will get rid of ugly promises and replace with
 something that async language like javascript should have from day one. It's supported in node.js 7
