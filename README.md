@@ -140,7 +140,7 @@ const items = await Menu.query(restaurant.id);
 const pizzas = items.filter(item => item.kind === 'pizza');
 
 await Promise.all(pizzas.map(async pizza => {
-   const ingridients = await Items.getForItem(pizza.id);
+   const ingridients = await Ingiridients.getForItem(pizza.id);
    
    if (ingridents.find(ingridient => ingiridient.name === 'cheese')) {
      await Restaurant.order(pizza);
