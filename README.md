@@ -111,7 +111,7 @@ something that async language like javascript should have from day one. It's sup
 using `--harmony-async-await` flag and you should defenitelly be using it. Even if your production does
 not have node.js 7 or you don't want to use beta features, you can use babel to compile.
 
-**Unuglify example**
+Unuglify example:
 
 ```
 // orders all cheese pizza
