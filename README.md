@@ -1,6 +1,11 @@
 # dev-guidelines
 
-General dev guidelines from sysadmins for developers
+General dev guidelines by sysadmins for developers
+
+## About
+
+This is a repo that every (angry) sysadmin should give to developers to again
+coexist in peace :)
 
 ## Tree of contents
 
