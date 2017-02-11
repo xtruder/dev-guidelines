@@ -8,9 +8,9 @@ logs will be the ones that will help you identify the culprit
 ## What and how to log?
 
 It's essentially important to identify what you need to log and how to log to make
-logs parsable. I have seen so many cases where output of application was verbose,
-but completelly useless. I have also seen cases where logs were unreadable, or logs
-were unindentifiable, because log messages were garbage.
+logs readable and searchable. We have seen so many cases where output of application
+was verbose, but completelly useless. I have also seen cases where logs were unreadable,
+or logs were unindentifiable, because log messages were garbage.
 
 ### How much logs?
 
