@@ -1,6 +1,6 @@
 # Version control
 
-Here we will not discuss why versioning in application is usefull, that should be
+Here we will not discuss why version control in applications is needed, that should be
 self-explanitory, but we will try to define good and bad practices.
 
 ## VCS
