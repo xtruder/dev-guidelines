@@ -10,6 +10,6 @@ General dev guidelines from sysadmins for developers
 - [Version control](versioncontrol.md)
 - [Logging](logging.md)
 
-## Languages
+### Languages
 
 - [NodeJS](lang/nodejs.md)
