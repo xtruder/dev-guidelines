@@ -2,6 +2,36 @@
 
 > NodeJS is the only real dev language
 
+## General
+
+- interpeter: nodejs7
+- coding standard: ES7
+
+### Tooling
+
+- Package manager: yarn, npm
+- Package registry: sinopia
+- Release: np
+- Typecheck: flowtype
+- Compiler: babel
+- Scaffolding: yeoman
+
+### Libraries
+
+#### Runtime
+
+- Logging: microkit, winston
+- HTTP client: request-promise
+- HTTP server: koa2
+- Amqp: amqplib
+
+#### Testing
+
+- Testing framework: mocha
+- Expect framework: chai
+- Mock: sinon
+- HTTP mock: nock
+
 ## Programmer notes
 
 We still see many developers writing ancient es5 javascript code. In a world where
@@ -55,12 +85,12 @@ for working with js structures:
 If you using these internal javascript methods, they are much faster, and provide nicer stack
 traces which allows easier debugging.
 
-#### Avoid promise libraries when possible
+### Avoid promise libraries when possible
 
 NodeJS has internal support for promises. Using internal promises, will not give you such rich
 functionality, but will provide much better debugging support and nicer stack traces.
 
-#### Avoid compiling javascript if not needed
+### Avoid compiling javascript if not needed
 
 I know there are fancy bleeding es7 or es8 features that you want to abuse, or you really want
 to use that typescript, that you have no idea how to use right, as you will soon be just writing
