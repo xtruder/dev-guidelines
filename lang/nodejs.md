@@ -237,4 +237,4 @@ class UserRepository extends Repository
 }
 ```
 
-This is not some magic construct, but the same is also used in some frameworks.
+This is not some magic construct, the same is also used in some frameworks (google polymer for ex.)
