@@ -4,8 +4,14 @@
 
 ## General
 
-- interpeter: nodejs7
+- interpeter: nodejs >= 7.6
 - coding standard: ES7
+- filestyle: uft-8, 4 spaces, lf, trim trailing whitespaces, final newline
+- codestyle: xo/esnext
+
+### NodeJS Installation
+
+Follow instructions on https://nodejs.org/en/download/package-manager/
 
 ### Tooling
 
@@ -22,7 +28,7 @@
 
 - Logging: microkit, winston
 - HTTP client: request-promise
-- HTTP server: koa2
+- HTTP server: koa@next
 - Amqp: amqplib
 
 #### Testing
@@ -36,30 +42,20 @@
 
 We still see many developers writing ancient es5 javascript code. In a world where
 we have node 7, that supports almost all es6 and even some features of es7, it's
-insane to write in code style of internet explorer 8. Even for ancient interpreters,
-there are compilers that can transpile code to whatever ancient javascript you need.
-While it's understandable that you do should not need to use all bleeding edge features you
-could at least stop writing an acient code and at least use javascript that somehow
-looks like a real language.
+ to write in code style of internet explorer 8. Even for ancient interpreters,
+there are compilers that can transpile code to version of javascript that is needed.
+While it's understandable that not all bleading features should be used, it's
+ok 
 
-These are basic essentials that you should use and should avoid in node.js:
+### Avoid callback pattern
 
-### Install new node.js (it's back compatible):
+Promises exists in javascript from nodejs 0.12. That's even before node.js
+had real versioning and looked like unstable beta. There are still many libraries
+that use callback pattern, these are usually old libraries, that you should
+avoid.
 
-While your distro probably provides some old stable node.js, you are a developer
-that does not live a few years back. While i know developers are generally lazy,
-and so are sysadmins, please install and use a decent version of node.js.
-
-https://nodejs.org/en/download/package-manager/
-
-### Stop using callback pattern
-
-Promises exists in javascript from ancient nodejs 0.12. That's even before node.js
-had real versioning and looked like unstable beta. While i see still many libraries
-that use callback pattern, these are old libraries, that you should avoid at all cost
-if you are any real node.js programmer.
-
-If you have to deal with some ancient library, you can still wrap code with a promise:
+If you have to deal with some code that still uses callback, you can wrap
+code with a promise:
 
 ```
 new Promise((resolve, reject) => {
@@ -69,9 +65,15 @@ new Promise((resolve, reject) => {
 
 ### Avoid lodash/underscore when possible
 
-While i have been a big fan of bluebird like libraries which provided framework for working
-with javascript structures, it turns out that es6 and es7 get much better internal support
-for working with js structures:
+Some people are still big fans of underscore like libraries which provided framework
+for working with javascript structures, it turns out that es6 and es7 get much
+better internal support for working with js structures. There are two main reasons
+why avoid usage of these: better debugging and less code breakage. For example
+lodash changed a lot of methods between versions. In one major update the code
+broken, because methods did not exist anymore, and no deprecation warning was
+raised.
+
+Example of ES6/ES7 methods that you can use:
 
 - list.filter
 - list.find
@@ -82,13 +84,14 @@ for working with js structures:
 - Object.assign
 ...
 
-If you using these internal javascript methods, they are much faster, and provide nicer stack
+These internal javascript methods are much faster, and provide nicer stack
 traces which allows easier debugging.
 
 ### Avoid promise libraries when possible
 
-NodeJS has internal support for promises. Using internal promises, will not give you such rich
-functionality, but will provide much better debugging support and nicer stack traces.
+NodeJS has internal support for promises. Using internal promises, will not give
+you such rich functionality, but will provide much better debugging support and
+nicer stack traces.
 
 ### Avoid compiling javascript if not needed
 
@@ -106,9 +109,9 @@ replace garbage.
 ### Use async/await
 
 Async/await is a new promise syntastic sugar that will get rid of ugly promises and replace with
-something that async language like javascript should have from day one. It's supported in node.js 7
-using `--harmony-async-await` flag and you should defenitelly be using it. Even if your production does
-not have node.js 7 or you don't want to use beta features, you can use babel to compile.
+something that async language like javascript should have from day one. It's supported in all new
+node.js versions. Even if your production does not have node.js 7, you can use
+babel to compile.
 
 Unuglify example:
 
@@ -148,3 +151,90 @@ await Promise.all(pizzas.map(async pizza => {
 ```
 
 Much nicer!
+
+### Use classes instead of direct `module.exports`:
+
+Classes provide greater flexibility when compared to direct `module.exports`
+and are not fundamendaly any harder. Here is an example:
+
+```
+const users = {};
+
+module.exports = 
+    create(model) {
+        users[model.id] = model;
+    }
+
+    get(id) {
+        return users[id];
+    }
+};
+```
+
+Compared to:
+
+```
+class UserRepository extends Repository {
+    constructor() {
+        super();
+
+        this._users = {};
+    }
+
+    create(model) {
+        this._users[model.id] = model;
+    }
+
+    get(id) {
+        return this._users[id];
+    }
+}
+
+module.exports = UserRepository;
+```
+
+With classes you can do so much more. First you can inherit from them, you can
+define getters and setters, you can instantiate them and prodvide class constructor,
+you can define static methods.
+If you use `module.exports` direcyly, you can hack all of that, but this is
+really bad practice in ES6 forward.
+
+Some developers think composition over inheritance. Composition is just a hip
+word for class mixins. While javascript, can't inherit from multiple bases, you
+can use functions that construct class mixins:
+
+```
+function loggerMixin(cls) {
+    return class extends cls {
+        constructor() {
+            super();
+
+            this._logger = new Logger(this.constructor.name);
+        }
+    };
+}
+
+function errorReporterMixin(cls) {
+    return class extends cls {
+        constructor() {
+            super();
+
+            this._logger = new ErrorReporter(this.constructor.name);
+        }
+    };
+}
+
+class Repository {
+    static mixin(mixinFunc) {
+        return mixinFunc(this);
+    }
+}
+
+class UserRepository extends Repository
+    .mixin(loggerMixin)
+    .mixin(errorReporterMixin) {
+
+}
+```
+
+This is not some magic construct, but the same is also used in some frameworks.

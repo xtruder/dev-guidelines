@@ -1,6 +1,6 @@
-# Engineering guide
+# Software Engineering Guidelines
 
-This document describes good engineering practices, for application design,
+This document describes good engineering practices, for software design,
 development and deployment.
 
 ## Tree of contents
