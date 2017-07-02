@@ -1,20 +1,16 @@
-# dev-guidelines
+# Engineering guide
 
-General dev guidelines by sysadmins for developers
-
-## About
-
-This is a repo that every (angry) sysadmin should give to developers to again
-coexist in peace :)
+This document describes good engineering practices, for application design,
+development and deployment.
 
 ## Tree of contents
 
-### General
+### Software development in general
 
 - [Filestyle](filestyle.md)
 - [Version control](versioncontrol.md)
 - [Logging](logging.md)
 
-### Languages
+### Language speciffic good practices
 
 - [NodeJS](lang/nodejs.md)
