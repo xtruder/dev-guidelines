@@ -246,3 +246,14 @@ It's a common mistake especially with `Promise.reject()` to return non errors, a
 to user. If anything else as instance of `Error` is returned, you will not see stack trace and
 problem will be much harder to debug. So rule is to allways throw instance of `Error`or reject promise
 with it.
+
+Two examples of usage:
+
+```
+throw new Error("some error happend")
+```
+
+```
+Promise.reject(new Error("some error happend"))
+```
+
