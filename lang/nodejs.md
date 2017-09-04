@@ -238,3 +238,11 @@ class UserRepository extends Repository
 ```
 
 This is not some magic construct, the same is also used in some frameworks (google polymer for ex.)
+
+### Allways throw or reject with `Error`instance on exception
+
+It's a common mistake especially with `Promise.reject()` to return non errors, as for example
+`undefined` or plain object. Error object automatically captutes stack trace, that is later displayed
+to user. If anything else as instance of `Error` is returned, you will not see stack trace and
+problem will be much harder to debug. So rule is to allways throw instance of `Error`or reject promise
+with it.
