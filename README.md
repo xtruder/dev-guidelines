@@ -8,7 +8,7 @@ development and deployment.
 ### Software development in general
 
 - [Filestyle](filestyle.md)
-- [Version control](versioncontrol.md)
+- [Version control](vsc/versioncontrol.md)
 - [Logging](logging.md)
 
 ### Language speciffic good practices
