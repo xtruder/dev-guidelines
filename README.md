@@ -14,3 +14,4 @@ development and deployment.
 ### Language speciffic good practices
 
 - [NodeJS](lang/nodejs.md)
+- [GoLang](lang/go.md)
