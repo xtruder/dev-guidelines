@@ -77,8 +77,12 @@ go.formatTool: "goimports"
 go.buildTags: "sqlite json1"
 ```
 
-## Programmer notes
+## Dev
+
+### Libraries
+
+- Validation: https://github.com/go-ozzo/ozzo-validation as it uses programming constructs rather than error-prone struct tags to specify how data should be validated.
 
 ### Documentation
 
-Use `doc.go` in every folder.
+Use `doc.go` in every package.
